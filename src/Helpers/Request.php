@@ -49,6 +49,8 @@ class Request {
             $tmp_string = str_replace($to_replace, '', $tmp_string);
         }
 
+        $tmp_string = str_replace('index.php', '', $tmp_string);
+
         if ($tmp_string == '') {
             $tmp_string = '/' . $tmp_string;
         }
