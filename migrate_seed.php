@@ -1,6 +1,6 @@
 <?php
 
-$config = include_once 'config/vars.php';
+$config = include_once __DIR__ . '/config/vars.php';
 $host = $config['db_host'];
 $db = $config['db_name'];
 $charset = $config['db_charset'];
@@ -25,6 +25,7 @@ $create_users_table_query = "
     CREATE TABLE IF NOT EXISTS `users` (
         `id` INT (11) AUTO_INCREMENT PRIMARY KEY,
         `username` VARCHAR (128) NOT NULL,
+        `email` VARCHAR (256) NOT NULL,
         `password` VARCHAR (128) NOT NULL,
         `timezone` VARCHAR (16) DEFAULT (0),
         `token` VARCHAR (128)
@@ -56,6 +57,7 @@ $create_tasks_table_query = "
         `description` VARCHAR (1024) NOT NULL,
         `deadline` VARCHAR (32) NOT NULL,
         `done` INT (1) DEFAULT (0),
+        `done_at` VARCHAR (32) NULL,
         FOREIGN KEY (`list_id`)
             REFERENCES `lists`(`id`)
             ON DELETE CASCADE
@@ -70,8 +72,8 @@ echo "Seeding tables";
 echo "\n";
 echo "...";
 echo "\n";
-$pdo->query("INSERT INTO `users` (`username`, `password`, `timezone`) VALUES ('test user', '$2y$10\$HcIqwVO6BcN3ecgQbWt6nu7YxXAVUtoGi4k0O8Br6B8ycUwzttIHW', '0')");
-$pdo->query("INSERT INTO `users` (`username`, `password`, `timezone`) VALUES ('real user', '$2y$10$0XJYgIugSW.8MDPYK7OSeedW5wf137UVdcHSF3zcekvpZT2SNWZW.', '0')");
+$pdo->query("INSERT INTO `users` (`username`, `email`, `password`, `timezone`) VALUES ('test user', 'test@gmail.com', '$2y$10\$HcIqwVO6BcN3ecgQbWt6nu7YxXAVUtoGi4k0O8Br6B8ycUwzttIHW', '0')");
+$pdo->query("INSERT INTO `users` (`username`, `email`, `password`, `timezone`) VALUES ('real user', 'test_again@gmail.com', '$2y$10$0XJYgIugSW.8MDPYK7OSeedW5wf137UVdcHSF3zcekvpZT2SNWZW.', '0')");
 
 echo "Users table seeded";
 echo "\n";
