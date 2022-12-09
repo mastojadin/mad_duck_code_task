@@ -14,4 +14,6 @@
 -- users have to be created via seed; care about the salt ;)
 
 -- check out cron_job folder for cron options
--- When testing mails remmemver to check spam folder
+-- When testing mails remmember to check spam folder
+
+-- timezones are integers +/- hours of timezones from gmt

@@ -6,14 +6,19 @@ use App\Jobs\Mail;
 class Emails {
     public function send_emails($fake_date = false)
     {
-        $today_start = gmdate('Y-m-d') . ' 00:00:00';
-        $today_end = gmdate('Y-m-d') . ' 23:59:59';
+        if (!$fake_date) {
+            $today_start = gmdate('Y-m-d') . ' 00:00:00';
+            $today_end = gmdate('Y-m-d') . ' 23:59:59';
+        } else {
+            $today_start = gmdate('Y-m-d', strtotime($fake_date)) . ' 00:00:00';
+            $today_end = gmdate('Y-m-d', strtotime($fake_date)) . ' 23:59:59';
+        }
 
         $query = "
             SELECT
                 u.id as uid,
                 u.email as email,
-                u.timezone as timezome,
+                u.timezone as timezone,
                 l.id as lid,
                 l.title as list_title,
                 t.id as tid,
@@ -22,7 +27,7 @@ class Emails {
             LEFT JOIN lists l ON l.user_id = u.id
             LEFT JOIN tasks t ON t.list_id = l.id
             WHERE 1=1
-                AND ADDTIME(t.done_at, u.timezone) BETWEEN :today_start AND :today_end
+                AND ADDTIME(t.done_at, CONCAT((-1*u.timezone), ':00:00')) BETWEEN :today_start AND :today_end
         ";
         $params = [
             ":today_start" => $today_start,
@@ -30,7 +35,17 @@ class Emails {
         ];
         $res = DB::do_my_query($query, $params);
 
+        foreach ($res as $key => $value) {
+            $for_midnight_check = !$fake_date ? date('Y-m-d H:i:s') : $fake_date;
+            if (!$this->check_if_midnight_according_to_timezone($for_midnight_check, $value['timezone'])) {
+                unset($res[$key]);
+            }
+        }
+
         $emails = $this->transform_to_nice($res);
+
+        var_dump($emails);
+        exit;
 
         foreach ($emails as $email => $values) {
             $email_to = $email;
@@ -38,7 +53,8 @@ class Emails {
             $subject = 'Finished Tasks';
             $message = $this->create_html_message($values);
 
-            Mail::send_email($email_to, $email_from, $subject, $message);
+            $check = Mail::send_email($email_to, $email_from, $subject, $message);
+            // do something id check is false
         }
     }
 
@@ -58,6 +74,17 @@ class Emails {
         }
 
         return $to_return;
+    }
+
+    private function check_if_midnight_according_to_timezone($date, $timezone)
+    {
+        $first_date_comparison = strtotime($date) + 60*$timezone + 60*60; // adding hour to init date + timezone
+        $second_date_comparison = strtotime($date) + 60*$timezone + 60*60*24; // adding day to init date + timezone
+
+        // if its the same day then its midnight
+        // i think
+        // ...
+        return date('Y-m-d', $first_date_comparison) == date('Y-m-d', $second_date_comparison);
     }
 
     private function create_html_message(array $data): string

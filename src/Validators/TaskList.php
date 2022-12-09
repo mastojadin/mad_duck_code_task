@@ -9,14 +9,16 @@ class TaskList {
             throw new \Exception('Title Must Not Be Empty');
         }
 
-        if (!filter_var($data['page'], FILTER_VALIDATE_INT)) {
+        if (isset($data['page']) && !filter_var($data['page'], FILTER_VALIDATE_INT)) {
             throw new \Exception('Page Must Be An Integer');
         }
 
-        try {
-            new Carbon($data['date']);
-        } catch (\Exception $e) {
-            throw new \Exception('Date Format Not Regonized');
+        if (isset($data['date'])) {
+            try {
+                new Carbon($data['date']);
+            } catch (\Exception $e) {
+                throw new \Exception('Date Format Not Regonized');
+            }
         }
     }
 

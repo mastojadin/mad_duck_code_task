@@ -8,7 +8,7 @@ class TaskList extends Main {
         $validator = new TaskListValidator;
         $validator->validate_get_data($this->get_data);
 
-        $all_lists = $this->my_r->get_all_lists($this->user_id, $this->get_data);
+        $all_lists = $this->my_r->get_all_lists($this->user_id, $this->timezone, $this->get_data);
         return ['all_lists' => $all_lists];
     }
 

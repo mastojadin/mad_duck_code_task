@@ -25,7 +25,7 @@ $create_users_table_query = "
     CREATE TABLE IF NOT EXISTS `users` (
         `id` INT (11) AUTO_INCREMENT PRIMARY KEY,
         `username` VARCHAR (128) NOT NULL,
-        `email` VARCHAR (256) NOT NULL,
+        `email` VARCHAR (256) UNIQUE NOT NULL,
         `password` VARCHAR (128) NOT NULL,
         `timezone` VARCHAR (16) DEFAULT (0),
         `token` VARCHAR (128)

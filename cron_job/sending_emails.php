@@ -14,7 +14,7 @@ if (isset($argv[1]) && $argv[1] == "checkcron=OK") {
     $cron = 'App\Cron\Emails';
     $cron = new $cron;
     
-    // $fake_check_for_sending_emails = '2022-12-06';
+    // $fake_check_for_sending_emails = '2022-12-06 23:01:00'; => has to have H:i:s moment
     // $cron->send_emails($fake_check_for_sending_emails);
     
     $cron->send_emails();

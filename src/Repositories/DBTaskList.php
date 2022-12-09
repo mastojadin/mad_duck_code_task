@@ -28,7 +28,7 @@ class DBTaskList extends Main implements TaskListInterface, AuthInterface {
         return $res;
     }
 
-    public function get_all_lists(int $user_id, array $get_data): array
+    public function get_all_lists(int $user_id, int $timezone, array $get_data): array
     {
         $title_condition = '';
         $title = $get_data['title'] ?? false;
@@ -49,6 +49,7 @@ class DBTaskList extends Main implements TaskListInterface, AuthInterface {
         $res_from = ($page - 1) * $this->per_page;
         $res_to = $page * $this->per_page;
 
+
         $query = "
             SELECT
                 id,
@@ -59,11 +60,12 @@ class DBTaskList extends Main implements TaskListInterface, AuthInterface {
             FROM lists
             WHERE 1=1
                 AND user_id = :user_id
-                AND created_at BETWEEN :date_start AND :date_end
+                AND ADDTIME(created_at, :timezone) BETWEEN :date_start AND :date_end
                 $title_condition
         ";
         $params = [
             ":user_id" => $user_id,
+            ":timezone" => -$timezone . ":00:00",
             ":date_start" => $date_start,
             ":date_end" => $date_end,
         ];
@@ -98,7 +100,7 @@ class DBTaskList extends Main implements TaskListInterface, AuthInterface {
 
     public function edit_list(array $post_data): mixed
     {
-        $query = "SELECT id FROM lists WHER id = :id";
+        $query = "SELECT id FROM lists WHERE id = :id";
         $params = [":id" => $post_data['id']];
         $res = DB::do_my_query($query, $params);
         if (!$res) {

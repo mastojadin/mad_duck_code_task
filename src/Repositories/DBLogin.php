@@ -7,7 +7,7 @@ use App\Helpers\FirstHelper;
 class DBLogin extends Main implements LoginRepositoryInterface {
     public function check_if_user_exists(array $data): mixed
     {
-        $username = $data['username'];
+        $email = $data['email'];
         $password = 'prefix_' . $data['password'] . '_sufix';
 
         $query = "
@@ -15,11 +15,11 @@ class DBLogin extends Main implements LoginRepositoryInterface {
                 password
             FROM users
             WHERE 1=1
-                AND username = :username
+                AND email = :email
             LIMIT 1
         ";
         $params = [
-            ":username" => $username,
+            ":email" => $email,
         ];
 
         $res = DB::do_my_query($query, $params);
@@ -32,18 +32,18 @@ class DBLogin extends Main implements LoginRepositoryInterface {
 
     public function get_bearer_token(array $data): mixed
     {
-        $username = $data['username'];
+        $email = $data['email'];
 
         $query = "
             SELECT
                 id
             FROM users
             WHERE 1=1
-                AND username = :username
+                AND email = :email
             LIMIT 1
         ";
         $params = [
-            ":username" => $username,
+            ":email" => $email,
         ];
 
         $res = DB::do_my_query($query, $params);

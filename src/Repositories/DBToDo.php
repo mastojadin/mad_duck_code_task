@@ -28,7 +28,7 @@ class DBToDo extends Main implements ToDoInterface, AuthInterface {
         return $res;
     }
 
-    public function get_all_todos(int $user_id, array $post_data, array $get_data): mixed
+    public function get_all_todos(int $user_id, int $timezone, array $post_data, array $get_data): mixed
     {
         $this->check_list_owner($user_id, $post_data['id']);
 
@@ -45,7 +45,7 @@ class DBToDo extends Main implements ToDoInterface, AuthInterface {
             $deadline_start = $date->toDateString() . ' 00:00:00';
             $deadline_end = $date->toDateString() . ' 23:59:59';
 
-            $deadline_condition = 'AND deadline BETWEEN :deadline_start AND :deadline_end';
+            $deadline_condition = 'AND AND ADDTIME(deadline, :timezone) BETWEEN :deadline_start AND :deadline_end';
         }
 
         $query = "
@@ -67,6 +67,7 @@ class DBToDo extends Main implements ToDoInterface, AuthInterface {
             $params[":done"] = $done;
         }
         if ($deadline) {
+            $params[":timezone"] = -$timezone . ":00:00";
             $params[":deadline_start"] = $deadline_start;
             $params[":deadline_end"] = $deadline_end;
         }

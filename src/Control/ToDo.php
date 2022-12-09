@@ -9,7 +9,7 @@ class ToDo extends Main {
         $validator->validate_show_todo($post_data);
         $validator->validate_get_data($this->get_data);
 
-        $all_todos = $this->my_r->get_all_todos($this->user_id, $post_data, $this->get_data);
+        $all_todos = $this->my_r->get_all_todos($this->user_id, $this->timezone, $post_data, $this->get_data);
         return ['all_todos' => $all_todos];
 
         return ['show_todo'];
