@@ -1,0 +1,482 @@
+{
+	"info": {
+		"_postman_id": "306a1d38-dcd9-4c82-9785-28ae3311d495",
+		"name": "MDC",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "22152337"
+	},
+	"item": [
+		{
+			"name": "welcome",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "mdc.test/",
+					"host": [
+						"mdc",
+						"test"
+					],
+					"path": [
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get the bearer token",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"email\": \"test@gmail.com\",\n    \"password\": \"123\"\n}"
+				},
+				"url": {
+					"raw": "mdc.test/",
+					"host": [
+						"mdc",
+						"test"
+					],
+					"path": [
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get all users",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Bearer",
+						"value": "1K$r8PJTlmCiAXxqMe6-9EudYwR04OGDcLVsjNhabWS37.QIv2gfyUk5zopFZntH",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "mdc.test/users",
+					"host": [
+						"mdc",
+						"test"
+					],
+					"path": [
+						"users"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "add new user",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Bearer",
+						"value": "1K$r8PJTlmCiAXxqMe6-9EudYwR04OGDcLVsjNhabWS37.QIv2gfyUk5zopFZntH",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"username\": \"MY_USER_NAME\",\n    \"password\": \"MY_PASSWORD\"\n}"
+				},
+				"url": {
+					"raw": "mdc.test/users",
+					"host": [
+						"mdc",
+						"test"
+					],
+					"path": [
+						"users"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "edit existing user",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Bearer",
+						"value": "1K$r8PJTlmCiAXxqMe6-9EudYwR04OGDcLVsjNhabWS37.QIv2gfyUk5zopFZntH",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"timezone\": -4\n}"
+				},
+				"url": {
+					"raw": "mdc.test/users",
+					"host": [
+						"mdc",
+						"test"
+					],
+					"path": [
+						"users"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "delete existing user",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Bearer",
+						"value": "1K$r8PJTlmCiAXxqMe6-9EudYwR04OGDcLVsjNhabWS37.QIv2gfyUk5zopFZntH",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"id\": 1\n}"
+				},
+				"url": {
+					"raw": "mdc.test/users",
+					"host": [
+						"mdc",
+						"test"
+					],
+					"path": [
+						"users"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get all lists",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Bearer",
+						"value": "1K$r8PJTlmCiAXxqMe6-9EudYwR04OGDcLVsjNhabWS37.QIv2gfyUk5zopFZntH",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "mdc.test/lists",
+					"host": [
+						"mdc",
+						"test"
+					],
+					"path": [
+						"lists"
+					],
+					"query": [
+						{
+							"key": "title",
+							"value": "My Second Test List",
+							"disabled": true
+						},
+						{
+							"key": "page",
+							"value": "1",
+							"disabled": true
+						},
+						{
+							"key": "date",
+							"value": "2022-12-06",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "add new list",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Bearer",
+						"value": "1K$r8PJTlmCiAXxqMe6-9EudYwR04OGDcLVsjNhabWS37.QIv2gfyUk5zopFZntH",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"title\": \"MY_LIST_TITLE\",\n    \"description\": \"MY_LIST_DESCRIPTION\"\n}"
+				},
+				"url": {
+					"raw": "mdc.test/lists",
+					"host": [
+						"mdc",
+						"test"
+					],
+					"path": [
+						"lists"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "edit existing list",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Bearer",
+						"value": "1K$r8PJTlmCiAXxqMe6-9EudYwR04OGDcLVsjNhabWS37.QIv2gfyUk5zopFZntH",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"id\": \"3\",\n    \"title\": \"EDITED TITLE\"\n}"
+				},
+				"url": {
+					"raw": "mdc.test/lists",
+					"host": [
+						"mdc",
+						"test"
+					],
+					"path": [
+						"lists"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "delete existing list",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Bearer",
+						"value": "1K$r8PJTlmCiAXxqMe6-9EudYwR04OGDcLVsjNhabWS37.QIv2gfyUk5zopFZntH",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"id\": 3\n}"
+				},
+				"url": {
+					"raw": "mdc.test/lists",
+					"host": [
+						"mdc",
+						"test"
+					],
+					"path": [
+						"lists"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get all todos",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Bearer",
+						"value": "1K$r8PJTlmCiAXxqMe6-9EudYwR04OGDcLVsjNhabWS37.QIv2gfyUk5zopFZntH",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"id\": 1\n}"
+				},
+				"url": {
+					"raw": "mdc.test/todos",
+					"host": [
+						"mdc",
+						"test"
+					],
+					"path": [
+						"todos"
+					],
+					"query": [
+						{
+							"key": "deadline",
+							"value": "2022-12-06",
+							"disabled": true
+						},
+						{
+							"key": "done",
+							"value": "1",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "add new todo",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Bearer",
+						"value": "1K$r8PJTlmCiAXxqMe6-9EudYwR04OGDcLVsjNhabWS37.QIv2gfyUk5zopFZntH",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"list_id\": 2,\n    \"title\": \"MY_TODO_TITLE\",\n    \"description\": \"MY_TODO_DESCRIPTION\",\n    \"deadline\": \"2022-12-08\"\n}"
+				},
+				"url": {
+					"raw": "mdc.test/todos",
+					"host": [
+						"mdc",
+						"test"
+					],
+					"path": [
+						"todos"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "edit existing todo",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Bearer",
+						"value": "1K$r8PJTlmCiAXxqMe6-9EudYwR04OGDcLVsjNhabWS37.QIv2gfyUk5zopFZntH",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"id\": \"7\",\n    \"title\": \"EDITED TITLE\"\n}"
+				},
+				"url": {
+					"raw": "mdc.test/todos",
+					"host": [
+						"mdc",
+						"test"
+					],
+					"path": [
+						"todos"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "delete existing todo",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Bearer",
+						"value": "1K$r8PJTlmCiAXxqMe6-9EudYwR04OGDcLVsjNhabWS37.QIv2gfyUk5zopFZntH",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"id\": \"15\"\n}"
+				},
+				"url": {
+					"raw": "mdc.test/todos",
+					"host": [
+						"mdc",
+						"test"
+					],
+					"path": [
+						"todos"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
