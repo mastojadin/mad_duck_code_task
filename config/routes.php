@@ -20,7 +20,7 @@ return [
     ],
     "delete" => [
         "/users" => ["User", "delete_user"], // does nothing ( delete user(s) manualy )
-        "/lists" => ["TaskList", "delete_list"], // id ( mandatory )
-        "/todos" => ["ToDo", "delete_todo"], // id ( mandatory )
+        "/lists" => ["TaskList", "delete_list"], // post(body) => id ( mandatory )
+        "/todos" => ["ToDo", "delete_todo"], // post(body) => id ( mandatory )
     ],
 ];
