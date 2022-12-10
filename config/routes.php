@@ -15,8 +15,8 @@ return [
     ],
     "put" => [
         "/users" => ["User", "edit_user"], // post(body) => timezone ( mandatory )
-        "/lists" => ["TaskList", "edit_list"], // post(body) => id, title ( both mandatory )
-        "/todos" => ["ToDo", "edit_todo"], // post(body) => id, title ( both mandatory )
+        "/lists" => ["TaskList", "edit_list"], // post(body) => id, title, description, date(created_at) ( id is mandatory )
+        "/todos" => ["ToDo", "edit_todo"], // post(body) => id, title, deadline, done ( id is mandatory )
     ],
     "delete" => [
         "/users" => ["User", "delete_user"], // does nothing ( delete user(s) manualy )
