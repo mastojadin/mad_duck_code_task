@@ -14,7 +14,7 @@
   
 
 -- php migrate_seed.php will create tables and seed them; after defining the database parameters  
--- users have to be created via seed; care about the salt ;)  
+-- users have to be created via seed; care about the salt ;)  'prefix_' . PASSWORD . '_sufix'  
   
 
 -- check out cron_job folder for cron options  
@@ -22,3 +22,5 @@
   
   
 -- timezones are integers +/- hours of timezones from gmt  
+  
+-- explanation for routes ( method, name, params ) are in /config/routes.php file
